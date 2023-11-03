@@ -60,7 +60,7 @@ allowRunOnClipboardChange:=true
 #Include lib_mouseSpeed.ahk
 #Include lib_mathBoard.ahk
 #include lib_loadAnimation.ahk
-
+#include lib_ExcelFunc.ahk
 
 ;change dir
 #include ..\userAHK
@@ -138,6 +138,115 @@ if (allowRunOnClipboardChange && !CapsLock && CLsets.global.allowClipboard != "0
 }
 allowRunOnClipboardChange:=true
 return
+
+
+;---------------------------- Excel 相關 -------------------------------
+
+#IfWinActive,ahk_class XLMAIN
+{
+    ;F功能区重新利用
+    f3::PostMessage, 0x111, 447, 0, , a
+    !l::
+        objExcel:=Excel_Get()
+        objExcel.Application.DisplayAlerts:= false
+        objExcel.ActiveWorkbook.Save
+        objExcel.ActiveWorkbook.close
+        objExcel.Application.DisplayAlerts:= true
+    return
+
+    !j::send,!asa
+
+    !k::send,!asd
+
+    ;没快捷键的常用功能,主要根据英文名改的
+    !s::Send,!ae
+
+    !q::
+        objExcel:=Excel_Get()
+        objExcel.Selection.Interior.ColorIndex := 6
+    return
+
+    ;无填充
+    !a::Send,!hhn
+
+    ;居中
+    !e::Send,!hac
+
+    ;自动换行
+    !w::Send,!hw
+
+    !t::send,!wff
+
+    !r::send,!ohr
+
+    ;自行调整行高
+    !x::
+        try{
+            ox := ComObjActive("Excel.Application")
+            ox.Application.Selection.EntireRow.AutoFit
+        }
+        catch e{
+            ;出错就用传统快捷键
+            Send,!ora
+        }
+    return
+
+    ;自行调整列宽
+    !z::
+        try{
+            ox := ComObjActive("Excel.Application")
+            ox.Application.Selection.EntireColumn.AutoFit
+        }
+        catch e{
+            Send,!oca
+        }
+    return
+
+    ;复制单元格纯文本
+    !c:: send,{F2}^+{Home}^c{Esc}
+
+    !v::
+        Send {Blind}{LAlt Up}
+        ; Clipboard:=""
+        ; SendInput,^c
+        ; Sleep 100
+            ; MsgBox,4096,选中粘贴的位置,选中粘贴的位置
+            ; Sleep 100
+            clipboard = %clipboard%
+            Sleep 100
+            send,{Blind}^v
+    return
+
+    !f::
+        ;批量插入行,F键留空，用于Everything
+        objExcel:=Excel_Get()
+        InputBox,b,批量插入行
+        loop % b
+        {
+            objExcel.ActiveCell.Offset(1, 0).EntireColumn.Insert
+        }
+    return
+
+    !d::
+        ;批量插入列
+        objExcel:=Excel_Get()
+        InputBox,b,批量插入列
+        loop % b
+        {
+            objExcel.ActiveCell.Offset(1, 0).EntireRow.Insert
+        }
+    return
+
+    ;选中和移动光标和切换工作表格中的行和列
+    ; 鼠标滚轮和方向键功能修改  
+    !WheelUp::Send,{WheelLeft}     ; 当鼠标滚轮向上滚动时，发送 WheelLeft 键（相当于按下左箭头键）  
+    !WheelDown::Send,{WheelRight}    ; 当鼠标滚轮向下滚动时，发送 WheelRight 键（相当于按下右箭头键）  
+    +WheelUp::Send,{Left}          ; 当鼠标滚轮向上滚动时（加上 Shift 键），发送 Left 键（相当于按下左箭头键）  
+    +WheelDown::Send,{Right}       ; 当鼠标滚轮向下滚动时（加上 Shift 键），发送 Right 键（相当于按下右箭头键）  
+    !Right::SendInput,^{PgDn}      ; 当按下右箭头键时，发送 {PgDn} 组合键（相当于按下 PageDown 键）  
+    !Left::SendInput,^{PgUp}        ; 当按下左箭头键时，发送 {PgUp} 组合键（相当于按下 PageUp 键）  
+    return
+}
 
 
 ;----------------------------keys-set-start-----------------------------
