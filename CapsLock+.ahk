@@ -60,7 +60,7 @@ allowRunOnClipboardChange:=true
 #Include lib_mouseSpeed.ahk
 #Include lib_mathBoard.ahk
 #include lib_loadAnimation.ahk
-#include lib_ExcelFunc.ahk
+#include lib_GetCOMObject.ahk
 
 ;change dir
 #include ..\userAHK
@@ -141,6 +141,12 @@ return
 
 
 ;---------------------------- Excel 相關 -------------------------------
+
+;-- 获取Excel窗口的COM对象
+Excel_Get()
+{
+    return GetCOMObject("ahk_class XLMAIN")
+}
 
 #IfWinActive,ahk_class XLMAIN
 {

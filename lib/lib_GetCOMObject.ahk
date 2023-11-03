@@ -1,4 +1,4 @@
-;-- 获取Excel、Outlook和Edge窗口的COM对象  By FeiYue
+; 获取当前窗口应用对象
 GetCOMObject(WinTitle)
 {
     static h:=DllCall("LoadLibrary", "Str","oleacc", "Ptr")
@@ -27,10 +27,4 @@ GetCOMObject(WinTitle)
     }
     MsgBox, 4096,, Error: Can't Get Object From ACC !
     Exit
-}
-
-;-- 获取Excel窗口的COM对象
-Excel_Get()
-{
-    return GetCOMObject("ahk_class XLMAIN")
 }
