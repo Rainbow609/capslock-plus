@@ -3,13 +3,18 @@ master 分支：v3.0+
 v2 分支：v2.x
 
 [官网（说明文档）](https://capslox.com/capslock-plus/)
-[原作者](https://github.com/wo52616111/capslock-plus)
+
+[原作者仓库](https://github.com/wo52616111/capslock-plus)
 
 # 说明
-Capslock+是一个加强 Capslock 键的功能，以提高效率的工具。在原作者的基础上加了一些自己常用的按键。
+Capslock+是一个加强 Capslock 键的功能，以提高效率的工具。在原作者的 master 基础上加了一些自己常用的按键。
 
-## 是否付费
-虽然没有任何措施来强制收费，但 Capslock+ 是收费的，金额不限，请自行根据使用时间和频率判定。如果要付费请付给原作者 [¥ 付费页面](http://junkai.me/payment/)
+# 新增按键
+
+
+## 是否收费
+虽然没有任何措施来强制收费，但 Capslock+ 是收费的，金额不限，请自行根据使用时间和频率判定。
+如果要付费请付给原作者 [¥ 付费页面](http://junkai.me/payment/)
 
 
 ## 怎么运行Capslock+的源码？
