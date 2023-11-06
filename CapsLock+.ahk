@@ -14,6 +14,10 @@ if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)"))
     ExitApp
 }
 
+; 设置脚本编码为UTF-8
+#NoEnv
+FileEncoding, UTF-8
+
 IfExist, capslock+icon.ico
 {
 ;freezing icon
@@ -160,6 +164,7 @@ Excel_Get()
         objExcel.Application.DisplayAlerts:= true
     return
 
+    ; az排序
     !j::send,!asa
 
     !k::send,!asd
@@ -167,6 +172,7 @@ Excel_Get()
     ;没快捷键的常用功能,主要根据英文名改的
     !s::Send,!ae
 
+    ; 底色改为 黄色
     !q::
         objExcel:=Excel_Get()
         objExcel.Selection.Interior.ColorIndex := 6
@@ -181,8 +187,10 @@ Excel_Get()
     ;自动换行
     !w::Send,!hw
 
+    ; 冻结窗格
     !t::send,!wff
 
+    ; 编辑 Sheet 名
     !r::send,!ohr
 
     ;自行调整行高
