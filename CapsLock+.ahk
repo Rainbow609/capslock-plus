@@ -263,6 +263,22 @@ Excel_Get()
 }
 
 
+;---------------------------- Outlook 相關 -------------------------------
+
+;-- 获取Outlook窗口的COM对象
+Outlook_Get()
+{
+    return GetCOMObject("ahk_class rctrl_renwnd32")
+}
+
+;仅在Outlook生效
+#IfWinActive, ahk_class rctrl_renwnd32
+{
+    ; 将 Ctrl+Q 映射为 Alt+Q
+    !q::SendInput, ^q
+
+}
+
 ;----------------------------keys-set-start-----------------------------
 #if CLsets.global.allowClipboard != "0"
 $^v::
