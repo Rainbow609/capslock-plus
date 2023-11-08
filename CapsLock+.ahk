@@ -1,4 +1,5 @@
-#SingleInstance force
+﻿#SingleInstance force
+SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; If the script is not elevated, relaunch as administrator and kill current instance:
 full_command_line := DllCall("GetCommandLine", "str")
@@ -13,10 +14,6 @@ if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)"))
     }
     ExitApp
 }
-
-; 设置脚本编码为UTF-8
-#NoEnv
-FileEncoding, UTF-8
 
 IfExist, capslock+icon.ico
 {
@@ -143,9 +140,7 @@ if (allowRunOnClipboardChange && !CapsLock && CLsets.global.allowClipboard != "0
 allowRunOnClipboardChange:=true
 return
 
-
 ;---------------------------- Excel 相關 -------------------------------
-
 ;-- 获取Excel窗口的COM对象
 Excel_Get()
 {
@@ -238,7 +233,7 @@ Excel_Get()
     return
 
     !f::
-        ; 批量插入行,F键留空，用于Everything
+        ;批量插入行,F键留空，用于Everything
         objExcel:=Excel_Get()
         InputBox,b,批量插入行
         loop % b
@@ -248,7 +243,7 @@ Excel_Get()
     return
 
     !d::
-        ; 批量插入列
+        ;批量插入列
         objExcel:=Excel_Get()
         InputBox,b,批量插入列
         loop % b
@@ -970,9 +965,6 @@ return
 
 
 #If
-
-
-
 
 GuiClose:
 GuiEscape:
