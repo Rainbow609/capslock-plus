@@ -82,17 +82,17 @@ start:
 global ctrlZ, CapsLock2, CapsLock
 
 Capslock::
-;ctrlZ:     Capslock+Z undo / redo flag
-;Capslock:  Capslock 键状态标记，按下是1，松开是0
-;Capslock2: 是否使用过 Capslock+ 功能标记，使用过会清除这个变量
+; ctrlZ:     Capslock+Z undo / redo flag
+; Capslock:  Capslock 键状态标记，按下是1，松开是0
+; Capslock2: 是否使用过 Capslock+ 功能标记，使用过会清除这个变量
 ctrlZ:=CapsLock2:=CapsLock:=1
 
 SetTimer, setCapsLock2, -300 ; 300ms 犹豫操作时间
 
-settimer, changeMouseSpeed, 50 ;暂时修改鼠标速度
+settimer, changeMouseSpeed, 50 ; 暂时修改鼠标速度
 
 KeyWait, Capslock
-CapsLock:="" ;Capslock最优先置空，来关闭 Capslock+ 功能的触发
+CapsLock:="" ; Capslock最优先置空，来关闭 Capslock+ 功能的触发
 if CapsLock2
 {
     if keyset.press_caps
@@ -154,7 +154,7 @@ Excel_Get()
 
 #IfWinActive,ahk_class XLMAIN
 {
-    ;F功能区重新利用
+    ; F功能区重新利用
     f3::PostMessage, 0x111, 447, 0, , a
     !l::
         objExcel:=Excel_Get()
@@ -167,24 +167,27 @@ Excel_Get()
     ; az排序
     !j::send,!asa
 
+    ; za排序
     !k::send,!asd
 
     ;没快捷键的常用功能,主要根据英文名改的
+    ; 资料剖析
     !s::Send,!ae
 
     ; 底色改为 黄色
     !q::
         objExcel:=Excel_Get()
         objExcel.Selection.Interior.ColorIndex := 6
+        objExcel.Cells(1, 1).Font.ColorIndex := 3    ; 将字体颜色设为红色
     return
 
-    ;无填充
+    ; 无填充
     !a::Send,!hhn
 
-    ;居中
+    ; 居中
     !e::Send,!hac
 
-    ;自动换行
+    ; 自动换行
     !w::Send,!hw
 
     ; 冻结窗格
@@ -193,19 +196,22 @@ Excel_Get()
     ; 编辑 Sheet 名
     !r::send,!ohr
 
-    ;自行调整行高
+    ; 移除重复项目
+    !g::Send,!am
+
+    ; 自行调整行高
     !x::
         try{
             ox := ComObjActive("Excel.Application")
             ox.Application.Selection.EntireRow.AutoFit
         }
         catch e{
-            ;出错就用传统快捷键
+            ; 出错就用传统快捷键
             Send,!ora
         }
     return
 
-    ;自行调整列宽
+    ; 自行调整列宽
     !z::
         try{
             ox := ComObjActive("Excel.Application")
@@ -216,7 +222,7 @@ Excel_Get()
         }
     return
 
-    ;复制单元格纯文本
+    ; 复制单元格纯文本
     !c:: send,{F2}^+{Home}^c{Esc}
 
     !v::
@@ -232,7 +238,7 @@ Excel_Get()
     return
 
     !f::
-        ;批量插入行,F键留空，用于Everything
+        ; 批量插入行,F键留空，用于Everything
         objExcel:=Excel_Get()
         InputBox,b,批量插入行
         loop % b
@@ -242,7 +248,7 @@ Excel_Get()
     return
 
     !d::
-        ;批量插入列
+        ; 批量插入列
         objExcel:=Excel_Get()
         InputBox,b,批量插入列
         loop % b
@@ -251,7 +257,7 @@ Excel_Get()
         }
     return
 
-    ;选中和移动光标和切换工作表格中的行和列
+    ; 选中和移动光标和切换工作表格中的行和列
     ; 鼠标滚轮和方向键功能修改  
     !WheelUp::Send,{WheelLeft}     ; 当鼠标滚轮向上滚动时，发送 WheelLeft 键（相当于按下左箭头键）  
     !WheelDown::Send,{WheelRight}    ; 当鼠标滚轮向下滚动时，发送 WheelRight 键（相当于按下右箭头键）  
@@ -276,6 +282,13 @@ Outlook_Get()
 {
     ; 将 Ctrl+Q 映射为 Alt+Q
     !q::SendInput, ^q
+
+    ; 表格自动适应栏宽
+    !w::
+        SendInput, !jlfc
+        Sleep, 1000
+        SendInput, !jlfw
+        return
 
 }
 
