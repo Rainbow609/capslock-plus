@@ -173,11 +173,20 @@ Excel_Get()
     !q::
         objExcel:=Excel_Get()
         objExcel.Selection.Interior.ColorIndex := 6
-        objExcel.Cells(1, 1).Font.ColorIndex := 3    ; 将字体颜色设为红色
+        objExcel.Selection.Font.ColorIndex := 3    ; 将字体颜色设为红色
     return
 
     ; 无填充
-    !a::Send,!hhn
+    !a::
+        try{
+            objExcel:=Excel_Get()
+            objExcel.Selection.Interior.ColorIndex := -4142    ; 将背景色设为无色（透明）
+            objExcel.Selection.Font.ColorIndex := 1    ; 将字体颜色设为黑色
+        }
+        catch e{    ; 出错就用传统快捷键
+            Send,!hhn
+        }
+    return
 
     ; 居中
     !e::Send,!hac
