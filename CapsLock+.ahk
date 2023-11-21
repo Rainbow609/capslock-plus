@@ -201,7 +201,15 @@ Excel_Get()
     !r::send,!ohr
 
     ; 移除重复项目
-    !g::Send,!am
+    !g::
+        try{
+            objExcel:=Excel_Get()
+            objExcel.Selection.ActiveSheet.UsedRange.RemoveDuplicates
+        }
+        catch e{    ; 出错就用传统快捷键
+            Send,!am
+        }
+    return
 
     ; 自行调整行高
     !x::
