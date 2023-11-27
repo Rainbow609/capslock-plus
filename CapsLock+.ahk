@@ -300,6 +300,7 @@ Outlook_Get()
         SendInput, !jlfc
         Sleep, 1000
         SendInput, !jlfw
+        SendInput, !hac
         return
 
 }
