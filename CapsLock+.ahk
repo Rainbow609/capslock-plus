@@ -300,11 +300,23 @@ Outlook_Get()
         SendInput, !jlfc
         Sleep, 1000
         SendInput, !jlfw
-        SendInput, !hac
+        ; SendInput, !hac
         return
 
 }
 
+;---------------------------- 自定義按鍵 -------------------------------
+
+
+;---------------------------- 鼠标相关 -------------------------------
+
+; 鼠标中键
+#IfWinActive, ahk_class TTOTAL_CMD
+{
+    ; 鼠标中键
+    MButton::
+        SendInput, !{F12}
+}
 ;----------------------------keys-set-start-----------------------------
 #if CLsets.global.allowClipboard != "0"
 $^v::
