@@ -1,0 +1,1 @@
+"C:\Program Files\AutoHotkey\AutoHotkey.exe" /ErrorStdOut "E:\B\capslock-plus-1\CapsLock+.ahk"

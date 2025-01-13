@@ -311,12 +311,13 @@ Outlook_Get()
 ;---------------------------- 鼠标相关 -------------------------------
 
 ; 鼠标中键
-#IfWinActive, ahk_class TTOTAL_CMD
-{
-    ; 鼠标中键
-    MButton::
-        SendInput, !{F12}
-}
+; #IfWinActive, ahk_class TTOTAL_CMD
+; {
+;     ; 鼠标中键
+;     MButton::
+;         SendInput, !{F12}
+;         return  ; 確保每個熱鍵塊以 return 結尾
+; }
 ;----------------------------keys-set-start-----------------------------
 #if CLsets.global.allowClipboard != "0"
 $^v::
