@@ -34,7 +34,7 @@ global whichClipboardNow  ;0 system clipboard; 1 capslock+ clipboard; 2 capslock
 allowRunOnClipboardChange:=true
 
 
-#Include lib
+#Include %A_ScriptDir%\lib
 #Include lib_init.ahk ;The beginning of all things
 
 ; language
